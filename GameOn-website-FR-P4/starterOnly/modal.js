@@ -19,7 +19,28 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 function launchModal() {
   modalbg.style.display = "block";
 }
-
+// Close modal
 function modalClose() {
   modalbg.style.display = "none";
 }
+//function check the formvalidity
+const firstName = document.getElementById("first");
+firstName.addEventListener("input", (e) => {
+  console.log(e.target.value);
+});
+
+// function checkFistName() {}
+
+// function checkLastName() {
+//   const lastName = document.getElementById("last");
+// }
+
+// function checkBirthDate() {
+//   const birthDate = document.getElementById("birthdate");
+// }
+
+// function checkEmail() {
+//   const eMail = document.getElementById("email");
+// }
+
+console.log(formData);
