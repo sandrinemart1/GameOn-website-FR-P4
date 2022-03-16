@@ -61,7 +61,7 @@
               id="reserve"
               action="index.html"
               method="get"
-              onsubmit="return validate();"
+              onsubmit=" validate();"
             >
             <!--post evite que l 'adresse mail soit visible'-->
               <div
@@ -72,6 +72,7 @@
                   type="text"
                   id="first"
                   name="first"
+                  required ="required"
                   minlength="2"
                 /><br>
                 <span id="error-first" ></span>
@@ -84,7 +85,7 @@
                   type="text"
                   id="last"
                   name="last"
-                  required pattern="^[a-zA-Z-\s]{2,}$";
+                  required ="required"
                 /><br>
                 <span id="error-last"></span>
               </div>
@@ -107,18 +108,20 @@
                   type="date"
                   id="birthdate"
                   name="birthdate"
+                  required ="required"
                 /><br>
                 <span  id="error-birthdate"></span>
               </div>
               <div
-                class="formData">
+                class="formData" >
                 <label >À combien de tournois GameOn avez-vous déjà participé ?</label><br>
                 <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99">
                 <span  id="error-quantity"></span>
               </div>
               <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
               <div
-                class="formData">
+                class="formData"
+                id ="cities-location">
                 <input
                   class="checkbox-input"
                   type="radio"
@@ -186,7 +189,8 @@
                   <span class="checkbox-icon"></span>
                   Portland</label
                 >
-              <pre id="log-radio"></pre>
+                <span id="city-choice"></span>
+              
               </div>
 
               <div
@@ -195,6 +199,7 @@
                   class="checkbox-input"
                   type="checkbox"
                   id="checkbox1"
+                  name="checkbox1"
                   checked
                 />
                 <label class="checkbox2-label" for="checkbox1" required>
