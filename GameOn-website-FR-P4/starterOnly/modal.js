@@ -68,7 +68,7 @@ function validFirst(e) {
   } else {
     errorMsg[0].innerHTML = "merci de nous avoir confié ton prénom";
     errorMsg[0].style.color = "green";
-    return true;
+    return validFirst;
   }
 }
 
@@ -90,7 +90,7 @@ function validLast(e) {
   } else {
     errorMsg[1].innerHTML = "merci de nous avoir confié ton nom";
     errorMsg[1].style.color = "green";
-    return true;
+    return validLast;
   }
 }
 
@@ -111,7 +111,7 @@ function validEmail(e) {
   } else {
     errorMsg[2].innerHTML = "merci de nous avoir confié ton E-mail";
     errorMsg[2].style.color = "green";
-    return true;
+    return validEmail;
   }
 }
 
@@ -132,7 +132,7 @@ function validBirth(e) {
   } else {
     errorMsg[3].innerHTML = "merci de nous avoir confié ta date de naissance";
     errorMsg[3].style.color = "green";
-    return true;
+    return validBirth;
   }
 }
 
@@ -154,7 +154,7 @@ function validQuantity(e) {
     errorMsg[4].style.color = "red";
     return false;
   } else {
-    return true;
+    return validQuantity;
   }
 }
 let formDiv = document.querySelectorAll("formData");
@@ -174,7 +174,7 @@ function validTerms() {
     errorMsg[6].style.color = "red";
     errorMsg[6].classList.add("error");
   } else {
-    return true;
+    return validTerms;
   }
 }
 myForm.addEventListener("submit", (e) => {
@@ -183,21 +183,21 @@ myForm.addEventListener("submit", (e) => {
 myForm.addEventListener("submit", validate);
 function validate() {
   if (
-    validFirst(form.first) == true &&
-    validLast(form.last) == true &&
-    validEmail(form.email) == true &&
-    validBirth(form.birthdate) == true &&
-    validQuantity(form.quantity) == true &&
-    // cityChoice(city) == true &&
-    validTerms(terms) == true
+    validFirst(form.first) == false &&
+    validLast(form.last) == false &&
+    validEmail(form.email) == false &&
+    validBirth(form.birthdate) == false &&
+    validQuantity(form.quantity) == false &&
+    // cityChoice(city) == false &&
+    validTerms(terms) == false
   ) {
-    errorMsg[6].innerHTML =
-      "merci " + prenom + " pour ton inscription pour le tournoi de " + cityUs;
-    errorMsg[6].style.color = "green";
-    return true;
-  } else {
     errorMsg[6].innerHTML = "le formulaire est incomplet. désolé!";
     errorMsg[6].style.color = "red";
     errorMsg[6].classList.add("error");
+  } else {
+    errorMsg[6].innerHTML =
+      "merci " + prenom + " pour ton inscription pour le tournoi de " + cityUs;
+    errorMsg[6].style.color = "green";
+    return validate;
   }
 }
