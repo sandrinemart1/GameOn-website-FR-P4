@@ -24,269 +24,180 @@ function launchModal() {
 function modalClose() {
   modalbg.style.display = "none";
 }
-//function check the form
-//check  input validity to true or false + add message
+//cibler les id et les classes
+//creer une fonction pour simplifier les ciblages
+let id = (id) => document.getElementById(id);
 
-//---- test input prénom et mise en forme message
-let firstName = document.getElementById("first");
-let firstMesg = document.getElementById("error-first");
-//regex pour definir2 caracteres min +zero chiffre + autorise prénoms composés. utilisés pour prénom et pour  nom
+let myForm = id("reserve");
+let firstName = id("first");
+let lastName = id("last");
+let eMail = id("email");
+let birthDate = id("birthdate");
+let Quantity = id("quantity");
+let terms = id("checkbox1");
+//variable undefined
+let prenom = "";
+//variables classes
+let classes = (classes) => document.getElementsByClassName(classes);
+let errorMsg = classes("error");
+let errorMesg = classes("formData[data-error]");
+
+/*regex pour definir2 caracteres min +zero chiffre + autorise prénoms composés*/
 const nameReGex =
   /^[a-zA-ZéèïîÉÈÎ][a-zA-Zéèêàçîï]+([-'\s][a-zA-ZéèïîÉÈÎ][a-zA-Zéèêàçîï]+)?$/;
-firstName.addEventListener("change", (e) => {
-  let firstNameValue = e.target.value;
-});
+//regex email
+const emailRegex = /^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/;
+//regex date de naissance pas encore au point
+const birthRegExp = /^(19\d\d|20[0-5])[-/]([1-9]|1[012])[-/]([12][0-9]|3[01])/;
+
 // valider champ rempli,format respecté et messages en rapport sur input
 firstName.addEventListener("input", validFirst);
+
 function validFirst(e) {
+  // prenom = "e.target.value;
+  // e.preventDefault();
   if (firstName.value.trim() == "") {
-    firstMesg.innerHTML = "merci de renseigner ton prénom";
-    firstMesg.classList.remove("valid");
-    firstMesg.classList.add("invalid");
-    // e.preventDefault();
+    errorMsg[0].innerHTML = "merci de renseigner ton prénom";
+    errorMsg[0].style.color = "red";
+    errorMsg[0].classList.add("error");
     return false;
   } else if (nameReGex.test(firstName.value) == false) {
-    firstMesg.innerHTML =
-      "désolée il faut recommencer, le prénom doit contenir 2 lettres min";
-    firstMesg.classList.remove("valid");
-    firstMesg.classList.add("invalid");
-    // e.preventDefault();
+    errorMsg[0].innerHTML = "le prénom doit comporter 2 lettres minimum";
+    errorMsg[0].style.color = "red";
     return false;
   } else {
-    firstMesg.innerHTML = "Merci de nous avoir confié ton prénom";
-    firstMesg.classList.remove("invalid");
-    firstMesg.classList.add("valid");
+    errorMsg[0].innerHTML = "merci de nous avoir confié ton prénom";
+    errorMsg[0].style.color = "green";
     return true;
   }
 }
 
 //---- test input nom et mise en forme message
-let lastName = document.getElementById("last");
-let lastMesg = document.getElementById("error-last");
-//methode plus simple non utilisée( sans l'attribut html required)
-// if (
-//   lastNameValue != "" ||
-//   lastName.value.trim().length < 2 ||
-//   (isNaN(lastName.value) == false)
+
 lastName.addEventListener("input", validLast);
 //valider champ rempli avec value missing et required en html
 function validLast(e) {
-  if (lastName.validity.valueMissing) {
-    lastMesg.innerHTML = "merci de renseigner ton nom";
-    lastMesg.classList.remove("valid");
-    lastMesg.classList.add("invalid");
-    e.preventDefault();
+  // e.preventDefault();
+  if (lastName.value.trim() == "") {
+    errorMsg[1].innerHTML = "merci de renseigner ton nom";
+    errorMsg[1].style.color = "red";
+    errorMsg[1].classList.add("error");
     return false;
   } else if (nameReGex.test(lastName.value) == false) {
-    lastMesg.innerHTML =
-      "désolée il faut recommencer,le nom doit contenir 2 lettres min";
-    lastMesg.classList.remove("valid");
-    lastMesg.classList.add("invalid");
-    e.preventDefault();
+    errorMsg[1].innerHTML = "le nom doit comporter 2 lettres minimum";
+    errorMsg[1].style.color = "red";
     return false;
   } else {
-    lastMesg.innerHTML = "Merci de nous avoir confié ton nom";
-    lastMesg.classList.remove("invalid");
-    lastMesg.classList.add("valid");
+    errorMsg[1].innerHTML = "merci de nous avoir confié ton nom";
+    errorMsg[1].style.color = "green";
     return true;
   }
 }
 
 //test input email
-let eMail = document.querySelector("#email");
-//regex email
-const emailRegex = /^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/g;
-let eMailMesg = document.getElementById("error-email");
 
 eMail.addEventListener("input", validEmail);
 function validEmail(e) {
-  if (eMail.validity.valueMissing) {
-    eMailMesg.innerHTML = "Nous aimerions connaitre ton E-mail";
-    eMailMesg.classList.remove("valid");
-    eMailMesg.classList.add("invalid");
-    e.preventDefault();
+  // e.preventDefault();
+  if (eMail.value.trim() == "") {
+    errorMsg[2].innerHTML = "merci de renseigner ton  E-mail";
+    errorMsg[2].style.color = "red";
+    errorMsg[2].classList.add("error");
     return false;
   } else if (emailRegex.test(eMail.value) == false) {
-    eMailMesg.innerHTML =
-      "désolée il faut recommencer, le format de ton E-mail est incorrect";
-    eMailMesg.classList.remove("valid");
-    eMailMesg.classList.add("invalid");
-    e.preventDefault();
+    errorMsg[2].innerHTML = " ton  E-mail n'a pas le bon format";
+    errorMsg[2].style.color = "red";
     return false;
   } else {
-    eMailMesg.innerHTML = "Merci de nous avoir confié ton E-mail";
-    eMailMesg.classList.remove("invalid");
-    eMailMesg.classList.add("valid");
+    errorMsg[2].innerHTML = "merci de nous avoir confié ton E-mail";
+    errorMsg[2].style.color = "green";
     return true;
   }
 }
 
 //test date de naissance et mise en forme message
-let birthDate = document.getElementById("birthdate");
-let birthDateMesg = document.querySelector("#error-birthdate");
-const birthRegExp = /^(19\d\d|20[0-5])[-/]([1-9]|1[012])[-/]([12][0-9]|3[01])/;
 
 form.birthdate.addEventListener("input", validBirth);
 function validBirth(e) {
-  if (birthDate.validity.valueMissing) {
-    birthDateMesg.innerHTML = "Nous aimerions connaitre ta date de naissance";
-    birthDateMesg.classList.remove("valid");
-    birthDateMesg.classList.add("invalid");
-    // e.preventDefault();
+  // e.preventDefault();
+  if (birthDate.value.trim() == "") {
+    errorMsg[3].innerHTML = "merci de renseigner ton âge";
+    errorMsg[3].style.color = "red";
+    errorMsg[3].classList.add("error");
     return false;
   } else if (birthRegExp.test(birthDate.value) == false) {
-    birthDateMesg.innerHTML =
-      "désolée il faut recommencer, le format de ta date de naissance est incorrect";
-    birthDateMesg.classList.remove("valid");
-    birthDateMesg.classList.add("invalid");
-    // e.preventDefault();
+    errorMsg[3].innerHTML = "ta date de naissance n'a pas le bon format";
+    errorMsg[3].style.color = "red";
     return false;
   } else {
-    birthDateMesg.innerHTML = "Merci de nous avoir confié ta date de naissance";
-    birthDateMesg.classList.remove("invalid");
-    birthDateMesg.classList.add("valid");
+    errorMsg[3].innerHTML = "merci de nous avoir confié ta date de naissance";
+    errorMsg[3].style.color = "green";
     return true;
   }
 }
 
 //test  et mise en forme nombre tournoi
-let quantityTour = document.querySelector("#quantity");
-let quantityMesg = document.querySelector("#error-quantity");
-
-quantityTour.addEventListener("checkbox-input", validTournament);
-function validTournament(e) {
-  let quantityValue = e.checked;
-  if (
-    (quantityValue =
-      "" || quantityValue < 0 || quantityValue > 99 || isNaN(quantityValue))
+Quantity.addEventListener("input", validQuantity);
+function validQuantity(e) {
+  // e.preventDefault();
+  if (Quantity.value.trim() == "") {
+    errorMsg[4].innerHTML = "merci de renseigner un nombre entre 0 et 99";
+    errorMsg[4].style.color = "red";
+    errorMsg[4].classList.add("error");
+    return false;
+  } else if (
+    Quantity.value < 0 ||
+    Quantity.value > 99 ||
+    isNaN(Quantity.value)
   ) {
-    quantityMesg.innerHTML =
-      "désolée  ce format est incorrect,nombre possible de 0 à 99";
-    quantityMesg.classList.remove("valid");
-    quantityMesg.classList.add("invalid");
-    e.preventDefault();
+    errorMsg[4].innerHTML = "le nombre doit être compris entre 0 et 99";
+    errorMsg[4].style.color = "red";
     return false;
   } else {
-    quantityMesg.innerHTML = "félicitation, tu es un joueur averti";
-    quantityMesg.classList.remove("invalid");
-    quantityMesg.classList.add("valid");
     return true;
   }
 }
+let formDiv = document.querySelectorAll("formData");
+// // test boutons radio
+let cityChoice = document.querySelectorAll(".checkbox-input");
+let cityUs = "";
+cityChoice.forEach((city) => {
+  city.addEventListener("click", (e) => {
+    cityUs = e.target.value;
 
-// test boutons radio
-
-const cityLocation = document.querySelectorAll(
-  "#cities-location.checkbox-input"
-);
-let locationMesg = document.getElementById("city-choice");
-
-function validTournament() {
-  for (let i = 0; i < cityLocation.length; i++) {
-    if (cityLocation[i].checked){
-      locationMesg.innerHTML = "Merci d'avoir fait ton choix";
-      locationMesg.classList.remove("invalid");
-      locationMesg.classList.add("valid");
-  return true;
-  }else{
-      locationMesg.innerHTML = "Tu ne désires pas participer?";
-      locationMesg.classList.remove("valid");
-      locationMesg.classList.add("invalid");
-      return false
-  }
-  }}
-// function
-
-//       return true;
-//       locationMesg.innerHTML = "Merci d'avoir fait ton choix";
-//       locationMesg.classList.remove("invalid");
-//       locationMesg.classList.add("valid");
-
-//     } else {
-//       locationMesg.innerHTML = "Tu ne désires pas participer?";
-//       locationMesg.classList.remove("valid");
-//       locationMesg.classList.add("invalid");
-//       return false
-//     }
-//   }
-// }
-
-// let cityLocation = document.getElementsByName("location");
-// let locationMesg = document.getElementById("city-choice");
-// // while (form.location.checked == null) {
-// //   locationMesg.innerHTML = "Tu ne désires pas participer?";
-// //   locationMesg.classList.remove("valid");
-// //   locationMesg.classList.add("invalid");
-// // }
-// function citychoice(e) {
-//   if (cityLocation.checked) {
-//     locationMesg.innerHTML = "Merci d'avoir fait ton choix";
-//     locationMesg.classList.remove("invalid");
-//     locationMesg.classList.add("valid");
-//   } else {
-//     e.preventDefault();
-//     locationMesg.innerHTML = "Tu ne désires pas participer?";
-//     locationMesg.classList.remove("valid");
-//     locationMesg.classList.add("invalid");
-//   }
-// }
-
-//test  conditions uitlisation et mise en forme
-https://www.commentcamarche.net/contents/573-javascript-les-evenements#qu-appelle-t-on-un-evenement
-function validConditions() {
-  let condition = document.querySelector("#checkbox1");
-  let condtionMesg = document.getElementById("error-condition");
-  const conditionValid = condition.checked;
-  condition.addEventListener("click", (e) => {
-    console.log(e.target);
+    return true;
   });
-
-  if (conditionValid) {
-    condtionMesg.innerHTML =
-      "Merci d'avoir validé les conditions d'utilisation";
-    condtionMesg.classList.remove("invalid");
-    condtionMesg.classList.add("valid");
-  } else {
-    condtionMesg.innerHTML =
-      "merci de prendre connaissance des conditions d'utilisation";
-    condtionMesg.classList.remove("valid");
-    condtionMesg.classList.add("invalid");
-  }
-
-
-// acceptCondition.addEventListener("input", validConditions);
-// function validConditions(e) {
-//   let acceptConditionValue = e.target.checked;
-//   if (acceptConditionValue == true) {
-//     validConditions == true;
-//     condtionMesg.innerHTML =
-//       "Merci d'avoir validé les conditions d'utilisation";
-//     condtionMesg.classList.remove("invalid");
-//     condtionMesg.classList.add("valid");
-//   } else {
-//     e.preventDefault();
-//     validConditions == false;
-//     condtionMesg.innerHTML =
-//       "merci de prendre connaissance des conditions d'utilisation";
-//     condtionMesg.classList.remove("valid");
-//     condtionMesg.classList.add("invalid");
-// }
-// }
-// ecoute et validation formulaire
-
-let myForm = document.getElementById("reserve");
-let btnSubmit = document.getElementById("btn-submit");
-
-btnSubmit.addEventListener("submit", function validate(e) {
-  e.preventDefault;
-
-  if (
-    validFirst(form.first) &&
-    validLast(form.last) &&
-    validEmail(form.email) &&
-    validBirth(form.birthdate) &&
-    validTournament(form.quantity)){
-
-    myForm.onsubmit();
-  }
 });
+function validTerms() {
+  if (!checkbox1.checked) {
+    errorMsg[6].innerHTML = "champ requis";
+    errorMsg[6].style.color = "red";
+    errorMsg[6].classList.add("error");
+  } else {
+    return true;
+  }
+}
+myForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+});
+myForm.addEventListener("submit", validate);
+function validate() {
+  if (
+    validFirst(form.first) == true &&
+    validLast(form.last) == true &&
+    validEmail(form.email) == true &&
+    validBirth(form.birthdate) == true &&
+    validQuantity(form.quantity) == true &&
+    // cityChoice(city) == true &&
+    validTerms(terms) == true
+  ) {
+    errorMsg[6].innerHTML =
+      "merci " + prenom + " pour ton inscription pour le tournoi de " + cityUs;
+    errorMsg[6].style.color = "green";
+    return true;
+  } else {
+    errorMsg[6].innerHTML = "le formulaire est incomplet. désolé!";
+    errorMsg[6].style.color = "red";
+    errorMsg[6].classList.add("error");
+  }
+}

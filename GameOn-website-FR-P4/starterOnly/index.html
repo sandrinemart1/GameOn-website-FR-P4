@@ -61,7 +61,7 @@
               id="reserve"
               action="index.html"
               method="get"
-              onsubmit=" validate();"
+          
             >
             <!--post evite que l 'adresse mail soit visible'-->
               <div
@@ -72,10 +72,10 @@
                   type="text"
                   id="first"
                   name="first"
-                  required ="required"
+                  
                   minlength="2"
                 /><br>
-                <span id="error-first" ></span>
+                <div class="error"></div>
               </div>
               <div
                 class="formData">
@@ -85,9 +85,9 @@
                   type="text"
                   id="last"
                   name="last"
-                  required ="required"
+                  
                 /><br>
-                <span id="error-last"></span>
+                <div class="error"></div>
               </div>
               <div
                 class="formData">
@@ -98,7 +98,7 @@
                   id="email"
                   name="email"
                 /><br>
-                <span id="error-email" ></span>
+                <div class="error"></div>
               </div>
               <div
                 class="formData">
@@ -108,15 +108,15 @@
                   type="date"
                   id="birthdate"
                   name="birthdate"
-                  required ="required"
+                  
                 /><br>
-                <span  id="error-birthdate"></span>
+                <div class="error"></div>
               </div>
               <div
                 class="formData" >
                 <label >À combien de tournois GameOn avez-vous déjà participé ?</label><br>
                 <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99">
-                <span  id="error-quantity"></span>
+                <div class="error"></div>
               </div>
               <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
               <div
@@ -189,7 +189,7 @@
                   <span class="checkbox-icon"></span>
                   Portland</label
                 >
-                <span id="city-choice"></span>
+                <div class="error"></div>
               
               </div>
 
@@ -202,11 +202,11 @@
                   name="checkbox1"
                   checked
                 />
-                <label class="checkbox2-label" for="checkbox1" required>
+                <label class="checkbox2-label" for="checkbox1" >
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label><br>
-                <span  id="error-condition"></span>
+                <div class="error"></div>>
                 <br>
                 <input class="checkbox-input" type="checkbox" id="checkbox2" />
                 <label class="checkbox2-label" for="checkbox2">
