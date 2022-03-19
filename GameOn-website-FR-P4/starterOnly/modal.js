@@ -41,7 +41,7 @@ let prenom = "";
 let classes = (classes) => document.getElementsByClassName(classes);
 let errorMsg = classes("error");
 let errorMesg = classes("formData[data-error]");
-
+let errorM = classes("formData");
 /*regex pour definir2 caracteres min +zero chiffre + autorise prénoms composés*/
 const nameReGex =
   /^[a-zA-ZéèïîÉÈÎ][a-zA-Zéèêàçîï]+([-'\s][a-zA-ZéèïîÉÈÎ][a-zA-Zéèêàçîï]+)?$/;
@@ -52,11 +52,12 @@ const birthRegExp = /^(19\d\d|20[0-5])[-/]([1-9]|1[012])[-/]([12][0-9]|3[01])/;
 
 // valider champ rempli,format respecté et messages en rapport sur input
 firstName.addEventListener("input", validFirst);
-
+//https://www.youtube.com/watch?v=On_WyUB1gOk video attribut
 function validFirst(e) {
-  // prenom = "e.target.value;
+  // prenom = e.target.value;
   // e.preventDefault();
   if (firstName.value.trim() == "") {
+    // errorMesg.dataset.data-error = "coucou";
     errorMsg[0].innerHTML = "merci de renseigner ton prénom";
     errorMsg[0].style.color = "red";
     errorMsg[0].classList.add("error");
@@ -140,6 +141,7 @@ function validBirth(e) {
 Quantity.addEventListener("input", validQuantity);
 function validQuantity(e) {
   // e.preventDefault();
+  console.log(e);
   if (Quantity.value.trim() == "") {
     errorMsg[4].innerHTML = "merci de renseigner un nombre entre 0 et 99";
     errorMsg[4].style.color = "red";
@@ -168,6 +170,36 @@ cityChoice.forEach((city) => {
     return true;
   });
 });
+// tester les cgu
+terms.addEventListener("input", validTerms);
+// function validTerms(e) {
+//   console.log(e.target.checked);
+//   // e.preventDefault();
+//   if (terms.value != checked) {
+//     errorMsg[2].innerHTML = "merci de renseigner ton  E-mail";
+//     errorMsg[2].style.color = "red";
+//     errorMsg[2].classList.add("error");
+//     return false;
+//   } else if (emailRegex.test(eMail.value) == false) {
+//     errorMsg[2].innerHTML = " ton  E-mail n'a pas le bon format";
+//     errorMsg[2].style.color = "red";
+//     return false;
+//   } else {
+//     errorMsg[2].innerHTML = "merci de nous avoir confié ton E-mail";
+//     errorMsg[2].style.color = "green";
+//     return validEmail;
+//   }
+// }
+
+function validTerms() {
+  if (checkbox1.checked) {
+    return validTerms;
+  } else {
+    errorMsg[6].innerHTML = "champ requis";
+    errorMsg[6].style.color = "red";
+    errorMsg[6].classList.add("error");
+  }
+}
 function validTerms() {
   if (!checkbox1.checked) {
     errorMsg[6].innerHTML = "champ requis";
@@ -183,13 +215,13 @@ myForm.addEventListener("submit", (e) => {
 myForm.addEventListener("submit", validate);
 function validate() {
   if (
-    validFirst(form.first) == false &&
-    validLast(form.last) == false &&
-    validEmail(form.email) == false &&
-    validBirth(form.birthdate) == false &&
-    validQuantity(form.quantity) == false &&
+    validFirst(firstName) == false &&
+    validLast(lastName) == false &&
+    validEmail(eMail) == false &&
+    validBirth(birthDate) == false &&
+    validQuantity(Quantity) == false &&
     // cityChoice(city) == false &&
-    validTerms(terms) == false
+    validTerms(form.checkbo1) == false
   ) {
     errorMsg[6].innerHTML = "le formulaire est incomplet. désolé!";
     errorMsg[6].style.color = "red";
