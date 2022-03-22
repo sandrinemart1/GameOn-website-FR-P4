@@ -29,19 +29,35 @@ function modalClose() {
 let id = (id) => document.getElementById(id);
 
 let myForm = id("reserve");
+//creation variable input + variable de validation finale
 let firstName = id("first");
+let firstValid = false;
+
 let lastName = id("last");
+let lastValid = false;
+
 let eMail = id("email");
+let eMailValid = false;
+
 let birthDate = id("birthdate");
+let birthDateValid = false;
+
 let Quantity = id("quantity");
+let QuantityValid = false;
+
 let terms = id("checkbox1");
-//variable undefined
+let termsValid = false;
+//variable undefined pour message final
 let prenom = "";
+let cityUs = "";
+
 //variables classes
 let classes = (classes) => document.getElementsByClassName(classes);
 let errorMsg = classes("error");
 let errorMesg = classes("formData[data-error]");
-let errorM = classes("formData");
+let errorM = document.querySelector(".formData");
+console.log(errorM);
+
 /*regex pour definir2 caracteres min +zero chiffre + autorise prénoms composés*/
 const nameReGex =
   /^[a-zA-ZéèïîÉÈÎ][a-zA-Zéèêàçîï]+([-'\s][a-zA-ZéèïîÉÈÎ][a-zA-Zéèêàçîï]+)?$/;
@@ -51,13 +67,12 @@ const emailRegex = /^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/;
 const birthRegExp = /^(19\d\d|20[0-5])[-/]([1-9]|1[012])[-/]([12][0-9]|3[01])/;
 
 // valider champ rempli,format respecté et messages en rapport sur input
+errorM.dataset.error = "coucou";
+errorM.dataset.errorVisible = true;
 firstName.addEventListener("input", validFirst);
-//https://www.youtube.com/watch?v=On_WyUB1gOk video attribut
+
 function validFirst(e) {
-  // prenom = e.target.value;
-  // e.preventDefault();
   if (firstName.value.trim() == "") {
-    // errorMesg.dataset.data-error = "coucou";
     errorMsg[0].innerHTML = "merci de renseigner ton prénom";
     errorMsg[0].style.color = "red";
     errorMsg[0].classList.add("error");
@@ -67,9 +82,10 @@ function validFirst(e) {
     errorMsg[0].style.color = "red";
     return false;
   } else {
+    prenom = firstName.value;
     errorMsg[0].innerHTML = "merci de nous avoir confié ton prénom";
     errorMsg[0].style.color = "green";
-    return validFirst;
+    firstValid = true;
   }
 }
 
@@ -78,7 +94,6 @@ function validFirst(e) {
 lastName.addEventListener("input", validLast);
 //valider champ rempli avec value missing et required en html
 function validLast(e) {
-  // e.preventDefault();
   if (lastName.value.trim() == "") {
     errorMsg[1].innerHTML = "merci de renseigner ton nom";
     errorMsg[1].style.color = "red";
@@ -91,7 +106,7 @@ function validLast(e) {
   } else {
     errorMsg[1].innerHTML = "merci de nous avoir confié ton nom";
     errorMsg[1].style.color = "green";
-    return validLast;
+    lastValid = true;
   }
 }
 
@@ -99,7 +114,6 @@ function validLast(e) {
 
 eMail.addEventListener("input", validEmail);
 function validEmail(e) {
-  // e.preventDefault();
   if (eMail.value.trim() == "") {
     errorMsg[2].innerHTML = "merci de renseigner ton  E-mail";
     errorMsg[2].style.color = "red";
@@ -112,7 +126,7 @@ function validEmail(e) {
   } else {
     errorMsg[2].innerHTML = "merci de nous avoir confié ton E-mail";
     errorMsg[2].style.color = "green";
-    return validEmail;
+    eMailValid = true;
   }
 }
 
@@ -120,7 +134,6 @@ function validEmail(e) {
 
 form.birthdate.addEventListener("input", validBirth);
 function validBirth(e) {
-  // e.preventDefault();
   if (birthDate.value.trim() == "") {
     errorMsg[3].innerHTML = "merci de renseigner ton âge";
     errorMsg[3].style.color = "red";
@@ -133,15 +146,13 @@ function validBirth(e) {
   } else {
     errorMsg[3].innerHTML = "merci de nous avoir confié ta date de naissance";
     errorMsg[3].style.color = "green";
-    return validBirth;
+    birthDateValid = true;
   }
 }
 
 //test  et mise en forme nombre tournoi
 Quantity.addEventListener("input", validQuantity);
 function validQuantity(e) {
-  // e.preventDefault();
-  console.log(e);
   if (Quantity.value.trim() == "") {
     errorMsg[4].innerHTML = "merci de renseigner un nombre entre 0 et 99";
     errorMsg[4].style.color = "red";
@@ -156,72 +167,50 @@ function validQuantity(e) {
     errorMsg[4].style.color = "red";
     return false;
   } else {
-    return validQuantity;
+    errorMsg[4].innerHTML = "merci de nous avoir confié le nombre de tournois";
+    errorMsg[4].style.color = "green";
+    QuantityValid = true;
   }
 }
 let formDiv = document.querySelectorAll("formData");
 // // test boutons radio
-let cityChoice = document.querySelectorAll(".checkbox-input");
-let cityUs = "";
-cityChoice.forEach((city) => {
-  city.addEventListener("click", (e) => {
-    cityUs = e.target.value;
+let cityChoice = false;
+let citiesLoc = document.querySelector("#cities-location");
+citiesLoc.addEventListener("click", (e) => {
+  // console.log(e.target);
 
-    return true;
-  });
+  if (e.target.classList.contains("checkbox-input")) {
+    cityUs = e.target.value;
+    cityChoice = true;
+  }
 });
+
 // tester les cgu
 terms.addEventListener("input", validTerms);
-// function validTerms(e) {
-//   console.log(e.target.checked);
-//   // e.preventDefault();
-//   if (terms.value != checked) {
-//     errorMsg[2].innerHTML = "merci de renseigner ton  E-mail";
-//     errorMsg[2].style.color = "red";
-//     errorMsg[2].classList.add("error");
-//     return false;
-//   } else if (emailRegex.test(eMail.value) == false) {
-//     errorMsg[2].innerHTML = " ton  E-mail n'a pas le bon format";
-//     errorMsg[2].style.color = "red";
-//     return false;
-//   } else {
-//     errorMsg[2].innerHTML = "merci de nous avoir confié ton E-mail";
-//     errorMsg[2].style.color = "green";
-//     return validEmail;
-//   }
-// }
 
-function validTerms() {
-  if (checkbox1.checked) {
-    return validTerms;
-  } else {
-    errorMsg[6].innerHTML = "champ requis";
-    errorMsg[6].style.color = "red";
-    errorMsg[6].classList.add("error");
-  }
-}
 function validTerms() {
   if (!checkbox1.checked) {
     errorMsg[6].innerHTML = "champ requis";
     errorMsg[6].style.color = "red";
     errorMsg[6].classList.add("error");
   } else {
-    return validTerms;
+    termsValid = true;
   }
 }
+// conditionner le submit à tous les autres tests
 myForm.addEventListener("submit", (e) => {
   e.preventDefault();
 });
 myForm.addEventListener("submit", validate);
 function validate() {
   if (
-    validFirst(firstName) == false &&
-    validLast(lastName) == false &&
-    validEmail(eMail) == false &&
-    validBirth(birthDate) == false &&
-    validQuantity(Quantity) == false &&
-    // cityChoice(city) == false &&
-    validTerms(form.checkbo1) == false
+    firstValid == false ||
+    lastValid == false ||
+    eMailValid == false ||
+    birthDateValid == false ||
+    QuantityValid == false ||
+    cityChoice == false ||
+    termsValid == false
   ) {
     errorMsg[6].innerHTML = "le formulaire est incomplet. désolé!";
     errorMsg[6].style.color = "red";
@@ -230,6 +219,6 @@ function validate() {
     errorMsg[6].innerHTML =
       "merci " + prenom + " pour ton inscription pour le tournoi de " + cityUs;
     errorMsg[6].style.color = "green";
-    return validate;
+    return true;
   }
 }
