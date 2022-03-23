@@ -216,14 +216,14 @@ input {
 }
 .formData[data-error]::after {
   content: attr(data-error);
-  font-size: 0.4em;
+  font-size: 0.55em;
   color: #e54858;
   display: block;
   margin-top: 7px;
   margin-bottom: 7px;
   text-align: right;
   line-height: 0.3;
-  opacity: 1;
+  opacity: 0;
   transition: 0.3s;
 }
 .formData[data-error-visible="true"]::after {
@@ -231,6 +231,24 @@ input {
 }
 .formData[data-error-visible="true"] .text-control {
   border: 2px solid #e54858;
+}
+.formData[data-thanks]::after {
+  content: attr(data-thanks);
+  font-size: 0.55em;
+  color: rgb(9, 185, 9);
+  display: block;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  text-align: right;
+  line-height: 0.3;
+  opacity: 0;
+  transition: 0.3s;
+}
+.formData[data-thanks-visible="true"]::after {
+  opacity: 1;
+}
+.formData[data-thanks-visible="true"] .text-control {
+  border: 2px solid rgb(9, 185, 9);
 }
 /* 
 input[data-error]::after {
