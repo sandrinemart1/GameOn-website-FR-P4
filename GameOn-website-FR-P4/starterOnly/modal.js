@@ -62,29 +62,31 @@ console.log(msgcss);
 /*regex pour definir2 caracteres min +zero chiffre + autorise prénoms composés*/
 const nameReGex =
   /^[a-zA-ZéèïîÉÈÎ][a-zA-Zéèêàçîï]+([-'\s][a-zA-ZéèïîÉÈÎ][a-zA-Zéèêàçîï]+)?$/;
-//regex email
+// regex email definit ensemble caractères suivi d 1 @ suivi ensemble de caractères suivi d'un point suivui de 2 à 10 caracteres en miniucules
 const emailRegex = /^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/;
-//regex date de naissance pas encore au point
+//regex date de naissance  avec limite d'age à la majorité
 const birthRegExp = /^(19\d\d|20[0-5])[-/]([0-9]|1[012])[-/]([12][0-9]|3[01])/;
 
-// valider champ rempli,format respecté et messages en rapport sur input
+// validation chaque  champ rempli,format respecté et messages en rapport sur input
 
 firstName.addEventListener("input", validFirst);
 
 function validFirst(e) {
   if (firstName.value.trim() == "") {
     msgcss[0].dataset.error = "merci de renseigner ton prénom";
+    msgcss[0].dataset.thanksVisible = false;
     msgcss[0].dataset.errorVisible = true;
-
     return false;
   } else if (nameReGex.test(firstName.value) == false) {
     msgcss[0].dataset.error = "le prénom doit comporter 2 lettres minimum";
+    msgcss[0].dataset.thanksVisible = false;
     msgcss[0].dataset.errorVisible = true;
     return false;
   } else {
     prenom = firstName.value;
 
     msgcss[0].dataset.thanks = "merci de nous avoir confié ton prénom";
+    msgcss[0].dataset.errorVisible = false;
     msgcss[0].dataset.thanksVisible = true;
     firstValid = true;
   }
@@ -97,14 +99,18 @@ lastName.addEventListener("input", validLast);
 function validLast(e) {
   if (lastName.value.trim() == "") {
     msgcss[1].dataset.error = "merci de renseigner ton nom";
+    msgcss[1].dataset.thanksVisible = false;
     msgcss[1].dataset.errorVisible = true;
     return false;
   } else if (nameReGex.test(lastName.value) == false) {
     msgcss[1].dataset.error = "le nom doit comporter 2 lettres minimum";
+    msgcss[1].dataset.thanksVisible = false;
+
     msgcss[1].dataset.errorVisible = true;
     return false;
   } else {
     msgcss[1].dataset.thanks = "merci de nous avoir confié ton nom";
+    msgcss[1].dataset.errorVisible = false;
     msgcss[1].dataset.thanksVisible = true;
     lastValid = true;
   }
@@ -116,14 +122,17 @@ eMail.addEventListener("input", validEmail);
 function validEmail(e) {
   if (eMail.value.trim() == "") {
     msgcss[2].dataset.error = "merci de renseigner ton E-mail";
+    msgcss[2].dataset.thanksVisible = false;
     msgcss[2].dataset.errorVisible = true;
     return false;
   } else if (emailRegex.test(eMail.value) == false) {
     msgcss[2].dataset.error = "ton  E-mail n'a pas le bon format";
+    msgcss[2].dataset.thanksVisible = false;
     msgcss[2].dataset.errorVisible = true;
     return false;
   } else {
     msgcss[2].dataset.thanks = "merci de nous avoir confié ton E-mail";
+    msgcss[2].dataset.errorVisible = false;
     msgcss[2].dataset.thanksVisible = true;
 
     eMailValid = true;
@@ -136,15 +145,18 @@ form.birthdate.addEventListener("input", validBirth);
 function validBirth(e) {
   if (birthDate.value.trim() == "") {
     msgcss[3].dataset.error = "merci de renseigner ton âge";
+    msgcss[3].dataset.thanksVisible = false;
     msgcss[3].dataset.errorVisible = true;
     return false;
   } else if (birthRegExp.test(birthDate.value) == false) {
     msgcss[3].dataset.error = "ta date de naissance n'a pas le bon format";
+    msgcss[3].dataset.thanksVisible = false;
     msgcss[3].dataset.errorVisible = true;
     return false;
   } else {
     msgcss[3].dataset.thanks =
       "merci de nous avoir confié ta date de naissance";
+    msgcss[3].dataset.errorVisible = false;
     msgcss[3].dataset.thanksVisible = true;
     birthDateValid = true;
   }
@@ -155,6 +167,7 @@ Quantity.addEventListener("input", validQuantity);
 function validQuantity(e) {
   if (Quantity.value.trim() == "") {
     msgcss[4].dataset.error = "merci de renseigner un nombre entre 0 et 99";
+    msgcss[4].dataset.thanksVisible = false;
     msgcss[4].dataset.errorVisible = true;
     return false;
   } else if (
@@ -163,11 +176,13 @@ function validQuantity(e) {
     isNaN(Quantity.value)
   ) {
     msgcss[4].dataset.error = "le nombre doit être compris entre 0 et 99";
+    msgcss[4].dataset.thanksVisible = false;
     msgcss[4].dataset.errorVisible = true;
     return false;
   } else {
     msgcss[4].dataset.thanks =
       "merci de nous avoir confié le nombre de tournois";
+    msgcss[4].dataset.errorVisible = false;
     msgcss[4].dataset.thanksVisible = true;
     QuantityValid = true;
   }
@@ -181,10 +196,12 @@ citiesLoc.addEventListener("click", (e) => {
     cityUs = e.target.value;
 
     msgcss[5].dataset.thanks = "merci de nous avoir confié ton choix";
+    msgcss[5].dataset.errorVisible = false;
     msgcss[5].dataset.thanksVisible = true;
     cityChoice = true;
   } else {
     msgcss[5].dataset.error = "merci de cocher ton choix";
+    msgcss[5].dataset.errorVisible = false;
     msgcss[5].dataset.errorVisible = true;
     cityChoice = true;
   }
@@ -196,10 +213,12 @@ terms.addEventListener("input", validTerms);
 function validTerms() {
   if (!checkbox1.checked) {
     msgcss[6].dataset.error = "champ requis";
+    msgcss[6].dataset.thanksVisible = false;
     msgcss[6].dataset.errorVisible = true;
   } else {
     msgcss[6].dataset.thanks =
       "merci d'avoir validé les conditions d'utilisation";
+    msgcss[6].dataset.errorVisible = false;
     msgcss[6].dataset.thanksVisible = true;
     cityChoice = true;
     termsValid = true;

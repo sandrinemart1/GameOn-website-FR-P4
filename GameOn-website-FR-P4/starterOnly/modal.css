@@ -210,10 +210,7 @@ input {
   font-size: 20px;
   height: 48px;
 }
-.error {
-  text-align: right;
-  font-size: 0.6em;
-}
+/* formadata pour afficher les messages d'erreur ou de réussite du remplissage du formulaire */
 .formData[data-error]::after {
   content: attr(data-error);
   font-size: 0.55em;
@@ -232,19 +229,21 @@ input {
 .formData[data-error-visible="true"] .text-control {
   border: 2px solid #e54858;
 }
-.formData[data-thanks]::after {
+.formData[data-thanks]::before {
   content: attr(data-thanks);
+  position: absolute;
   font-size: 0.55em;
   color: rgb(9, 185, 9);
   display: block;
-  margin-top: 7px;
+  margin-top: 94px;
   margin-bottom: 7px;
-  text-align: right;
+
   line-height: 0.3;
   opacity: 0;
   transition: 0.3s;
+  right: 48px;
 }
-.formData[data-thanks-visible="true"]::after {
+.formData[data-thanks-visible="true"]::before {
   opacity: 1;
 }
 .formData[data-thanks-visible="true"] .text-control {
