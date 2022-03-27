@@ -75,6 +75,7 @@ img {
   .topnav a.icon {
     float: right;
     display: block;
+    color: #f00;
   }
 }
 
@@ -82,7 +83,7 @@ img {
   .topnav.responsive {
     position: relative;
   }
-  .topnav.responsive .icon {
+  .topnav.responsive a.icon {
     position: absolute;
     right: 0;
     top: 0;
@@ -101,7 +102,7 @@ img {
   .topnav a.icon {
     float: right;
     display: block;
-    margin-top: -15px;
+    margin-top: 5px;
   }
 }
 
@@ -174,7 +175,7 @@ main {
 .content {
   margin: 5% auto;
   width: 100%;
-  max-width: 500px;
+  max-width: 536px;
   animation-name: modalopen;
   animation-duration: var(--modal-duration);
   background: #232323;
@@ -188,14 +189,16 @@ main {
 .modal-body {
   padding: 15px 8%;
   margin: 15px auto;
+  min-width: 300px;
 }
 
 label {
   font-family: var(--font-default);
-  font-size: 17px;
+  font-size: 16px;
   font-weight: normal;
   display: inline-block;
   margin-bottom: 11px;
+  margin-top: 11px;
 }
 input {
   padding: 8px;
@@ -210,6 +213,23 @@ input {
   font-size: 20px;
   height: 48px;
 }
+/* .form::after {
+  background-color: #000;
+  color: #000;
+  border-color: #000;
+} */
+/* .content,
+.formData :not(:last-child),
+input {
+  background-color: #000;
+  color: #000;
+  border-color: #000;
+}
+.checkbox-icon,
+.checkbox-label,
+.checkbox2-label {
+  display: none;
+} */
 /* formadata pour afficher les messages d'erreur ou de réussite du remplissage du formulaire */
 .formData[data-error]::after {
   content: attr(data-error);
@@ -233,9 +253,9 @@ input {
   content: attr(data-thanks);
   position: absolute;
   font-size: 0.55em;
-  color: rgb(9, 185, 9);
+  color: #279e7a;
   display: block;
-  margin-top: 94px;
+  margin-top: 96px;
   margin-bottom: 7px;
 
   line-height: 0.3;
@@ -247,7 +267,7 @@ input {
   opacity: 1;
 }
 .formData[data-thanks-visible="true"] .text-control {
-  border: 2px solid rgb(9, 185, 9);
+  border: 2px solid #279e7a;
 }
 /* 
 input[data-error]::after {
@@ -426,6 +446,7 @@ input[data-error]::after {
 .text-label {
   font-weight: normal;
   font-size: 16px;
+  padding-top: 25px;
 }
 .hero-section {
   min-height: 93vh;
@@ -437,13 +458,13 @@ input[data-error]::after {
   margin-bottom: 10px;
 }
 .hero-content {
-  padding: 51px 67px;
+  padding: 51px 45px;
   grid-column: span 4;
   background: #232323;
   color: #fff;
   position: relative;
   text-align: left;
-  min-width: 424px;
+  /* min-width: 424px; */
 }
 .hero-content::after {
   content: "";
@@ -509,6 +530,12 @@ footer {
   color: #f00;
   font-size: 0.8em;
 }
+
+@media screen and (max-width: 930px) {
+  .hero-headline {
+    font-size: 5rem;
+  }
+}
 @media screen and (max-width: 800px) {
   .hero-section {
     display: block;
@@ -547,7 +574,22 @@ footer {
     text-align: center;
   }
 }
-
+@media screen and (max-width: 710px) {
+  .hero-headline {
+    font-size: 3.3rem;
+  }
+  .hero-text {
+    font-size: 1.3rem;
+  }
+}
+@media screen and (max-width: 540px) {
+  .hero-headline {
+    font-size: 3rem;
+  }
+  .hero-content {
+    min-width: 330px;
+  }
+}
 @keyframes modalopen {
   from {
     opacity: 0;

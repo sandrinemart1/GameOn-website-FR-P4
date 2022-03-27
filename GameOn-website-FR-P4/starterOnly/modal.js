@@ -12,7 +12,7 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 let form = document.querySelector("#reserve");
-// console.log(form.email);form.name de input pour y acceder
+
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
@@ -46,19 +46,16 @@ let Quantity = id("quantity");
 let QuantityValid = false;
 
 let terms = id("checkbox1");
-let termsValid = false;
+let termsValid = true;
 //variable undefined pour message final
 let prenom = "";
 let cityUs = "";
 
 //variables classes
 let classes = (classes) => document.getElementsByClassName(classes);
-let errorMsg = classes("error");
-let msgcss = document.getElementsByClassName("formData");
-let errorMesg = classes("formData[data-error]");
-let errorM = document.querySelector(".formData");
-console.log(msgcss);
 
+let msgcss = classes("formData");
+let errorMesg = classes("formData[data-error]");
 /*regex pour definir2 caracteres min +zero chiffre + autorise prénoms composés*/
 const nameReGex =
   /^[a-zA-ZéèïîÉÈÎ][a-zA-Zéèêàçîï]+([-'\s][a-zA-ZéèïîÉÈÎ][a-zA-Zéèêàçîï]+)?$/;
@@ -105,7 +102,6 @@ function validLast(e) {
   } else if (nameReGex.test(lastName.value) == false) {
     msgcss[1].dataset.error = "le nom doit comporter 2 lettres minimum";
     msgcss[1].dataset.thanksVisible = false;
-
     msgcss[1].dataset.errorVisible = true;
     return false;
   } else {
@@ -134,7 +130,6 @@ function validEmail(e) {
     msgcss[2].dataset.thanks = "merci de nous avoir confié ton E-mail";
     msgcss[2].dataset.errorVisible = false;
     msgcss[2].dataset.thanksVisible = true;
-
     eMailValid = true;
   }
 }
@@ -196,32 +191,41 @@ citiesLoc.addEventListener("click", (e) => {
     cityUs = e.target.value;
 
     msgcss[5].dataset.thanks = "merci de nous avoir confié ton choix";
-    msgcss[5].dataset.errorVisible = false;
-    msgcss[5].dataset.thanksVisible = true;
+    // msgcss[5].dataset.errorVisible = false;
+    // msgcss[5].dataset.thanksVisible = true;
     cityChoice = true;
   } else {
     msgcss[5].dataset.error = "merci de cocher ton choix";
-    msgcss[5].dataset.errorVisible = false;
-    msgcss[5].dataset.errorVisible = true;
-    cityChoice = true;
+    // msgcss[5].dataset.thanksVisible = false;
+    // msgcss[5].dataset.errorVisible = true;
+    cityChoice = false;
   }
 });
 
 // tester les cgu
 terms.addEventListener("input", validTerms);
-
+// terms.addEventListener("input", (e) => {
+//   console.log(e);
+// });
 function validTerms() {
-  if (!checkbox1.checked) {
-    msgcss[6].dataset.error = "champ requis";
-    msgcss[6].dataset.thanksVisible = false;
-    msgcss[6].dataset.errorVisible = true;
-  } else {
+  if (terms.checked) {
     msgcss[6].dataset.thanks =
       "merci d'avoir validé les conditions d'utilisation";
     msgcss[6].dataset.errorVisible = false;
     msgcss[6].dataset.thanksVisible = true;
-    cityChoice = true;
     termsValid = true;
+    // msgcss[6].dataset.error = "champ requis";
+    // msgcss[6].dataset.thanksVisible = false;
+    // msgcss[6].dataset.errorVisible = true;
+  } else {
+    msgcss[6].dataset.error = "champ requis";
+    msgcss[6].dataset.thanksVisible = false;
+    msgcss[6].dataset.errorVisible = true;
+    // msgcss[6].dataset.thanks =
+    //   "merci d'avoir validé les conditions d'utilisation";
+    // msgcss[6].dataset.errorVisible = false;
+    // msgcss[6].dataset.thanksVisible = true;
+    // termsValid = true;
   }
 }
 // conditionner le submit à tous les autres tests
@@ -239,12 +243,20 @@ function validate() {
     cityChoice == true &&
     termsValid == true
   ) {
-    msgcss[8].dataset.thanks =
-      "merci " + prenom + " pour ton inscription pour le tournoi de " + cityUs;
-    msgcss[8].dataset.thanksVisible = true;
+    
+    // msgcss[8].dataset.thanks =
+    //   "merci " + prenom + " pour ton inscription pour le tournoi de " + cityUs;
+    // msgcss[8].dataset.thanksVisible = true;
     return true;
   } else {
     msgcss[8].dataset.error = "le formulaire est incomplet. désolé!";
     msgcss[8].dataset.errorVisible = true;
   }
 }
+// console.log(firstValid);
+// console.log(lastValid);
+// console.log(eMailValid);
+// console.log(birthDateValid);
+// console.log(QuantityValid);
+// console.log(cityChoice);
+// console.log(termsValid);
