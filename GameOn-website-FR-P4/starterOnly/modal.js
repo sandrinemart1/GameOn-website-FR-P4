@@ -47,7 +47,14 @@ let QuantityValid = false;
 
 let terms = id("checkbox1");
 let termsValid = true;
-//variable undefined pour message final
+
+let formDiv = document.querySelectorAll("formData");
+
+//variables pour message final
+let btnValid = document.querySelector("#btn-submit");
+let modalBlack = document.querySelector(".modal2");
+let msgFinal = document.querySelector(".modal2 p");
+
 let prenom = "";
 let cityUs = "";
 
@@ -67,7 +74,7 @@ const birthRegExp = /^(19\d\d|20[0-5])[-/]([0-9]|1[012])[-/]([12][0-9]|3[01])/;
 // validation chaque  champ rempli,format respecté et messages en rapport sur input
 
 firstName.addEventListener("input", validFirst);
-
+//input prénom
 function validFirst(e) {
   if (firstName.value.trim() == "") {
     msgcss[0].dataset.error = "merci de renseigner ton prénom";
@@ -89,10 +96,8 @@ function validFirst(e) {
   }
 }
 
-//---- test input nom et mise en forme message
-
+//input nom
 lastName.addEventListener("input", validLast);
-//valider champ rempli avec value missing et required en html
 function validLast(e) {
   if (lastName.value.trim() == "") {
     msgcss[1].dataset.error = "merci de renseigner ton nom";
@@ -112,8 +117,7 @@ function validLast(e) {
   }
 }
 
-//test input email
-
+// input email
 eMail.addEventListener("input", validEmail);
 function validEmail(e) {
   if (eMail.value.trim() == "") {
@@ -135,7 +139,6 @@ function validEmail(e) {
 }
 
 //test date de naissance et mise en forme message
-
 form.birthdate.addEventListener("input", validBirth);
 function validBirth(e) {
   if (birthDate.value.trim() == "") {
@@ -175,14 +178,12 @@ function validQuantity(e) {
     msgcss[4].dataset.errorVisible = true;
     return false;
   } else {
-    msgcss[4].dataset.thanks =
-      "merci de nous avoir confié le nombre de tournois";
     msgcss[4].dataset.errorVisible = false;
     msgcss[4].dataset.thanksVisible = true;
     QuantityValid = true;
   }
 }
-let formDiv = document.querySelectorAll("formData");
+
 // // test boutons radio
 let cityChoice = false;
 let citiesLoc = document.querySelector("#cities-location");
@@ -191,13 +192,13 @@ citiesLoc.addEventListener("click", (e) => {
     cityUs = e.target.value;
 
     msgcss[5].dataset.thanks = "merci de nous avoir confié ton choix";
-    // msgcss[5].dataset.errorVisible = false;
-    // msgcss[5].dataset.thanksVisible = true;
+    msgcss[5].dataset.errorVisible = false;
+    msgcss[5].dataset.thanksVisible = true;
     cityChoice = true;
   } else {
     msgcss[5].dataset.error = "merci de cocher ton choix";
-    // msgcss[5].dataset.thanksVisible = false;
-    // msgcss[5].dataset.errorVisible = true;
+    msgcss[5].dataset.thanksVisible = false;
+    msgcss[5].dataset.errorVisible = true;
     cityChoice = false;
   }
 });
@@ -214,18 +215,11 @@ function validTerms() {
     msgcss[6].dataset.errorVisible = false;
     msgcss[6].dataset.thanksVisible = true;
     termsValid = true;
-    // msgcss[6].dataset.error = "champ requis";
-    // msgcss[6].dataset.thanksVisible = false;
-    // msgcss[6].dataset.errorVisible = true;
   } else {
     msgcss[6].dataset.error = "champ requis";
     msgcss[6].dataset.thanksVisible = false;
     msgcss[6].dataset.errorVisible = true;
-    // msgcss[6].dataset.thanks =
-    //   "merci d'avoir validé les conditions d'utilisation";
-    // msgcss[6].dataset.errorVisible = false;
-    // msgcss[6].dataset.thanksVisible = true;
-    // termsValid = true;
+    termsValid = false;
   }
 }
 // conditionner le submit à tous les autres tests
@@ -243,20 +237,16 @@ function validate() {
     cityChoice == true &&
     termsValid == true
   ) {
-    
-    // msgcss[8].dataset.thanks =
-    //   "merci " + prenom + " pour ton inscription pour le tournoi de " + cityUs;
-    // msgcss[8].dataset.thanksVisible = true;
-    return true;
+    msgcss[8].dataset.errorVisible = false;
+    modalBlack.style.display = "inherit";
+    msgFinal.innerHTML =
+      "Merci " +
+      prenom +
+      ", d'avoir validé ta participation pour le tournoi de <br>" +
+      cityUs;
+    btnValid.value = "Fermer";
   } else {
-    msgcss[8].dataset.error = "le formulaire est incomplet. désolé!";
     msgcss[8].dataset.errorVisible = true;
+    msgcss[8].dataset.error = "le formulaire est incomplet. désolé!";
   }
 }
-// console.log(firstValid);
-// console.log(lastValid);
-// console.log(eMailValid);
-// console.log(birthDateValid);
-// console.log(QuantityValid);
-// console.log(cityChoice);
-// console.log(termsValid);
