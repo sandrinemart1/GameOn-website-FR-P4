@@ -5,13 +5,19 @@ let bgDelete4 = document.querySelector(".bground");
 let modBtn = document.querySelector(".modal-btn");
 let spanClose = document.querySelector(".close");
 let modalBody = document.querySelector(".modal-body");
+var x = document.getElementById("myTopnav");
 
-//fonction simplification fonction restauration
+//fonction aides fonction restauration(arrierefond-resetmodal, form et bouton submit)
 function restoreMainPageHelp() {
   bgDelete2.style.display = "block";
   bgDelete3.style.display = "block";
   bgDelete4.style.background = "rgba(26, 39, 156, 0.4)";
+  modalBlack.style.display = "none";
+  modalClose();
+  form.reset();
+  btnValid.value = "C'est parti";
 }
+
 // fonction arriere-plan de la modal en blanc
 modBtn.addEventListener("click", () => {
   bgDelete1.style.display = "none";
@@ -32,25 +38,11 @@ function restoreMainPage() {
   }
 }
 //fonction restauration main page avec btn submit
-
 btnValid.addEventListener("click", restoreMainPage2);
 function restoreMainPage2() {
   if (btnValid.value === "Fermer") {
-    restoreMainPage();
     modalClose();
+    restoreMainPage();
+    modBtn.cliked = true;
   }
 }
-
-if (btnValid.value === "Fermer") btnValid.cliked;
-//appliquer la classe custom-select aux 3 premiers input
-// let inputStyle = document.querySelectorAll("input");
-
-// inputStyle[0].addEventListener("input", () => {
-//   inputStyle[0].classList.add("custom-select");
-// });
-// inputStyle[1].addEventListener("input", () => {
-//   inputStyle[1].classList.add("custom-select");
-// });
-// inputStyle[2].addEventListener("input", () => {
-//   inputStyle[2].classList.add("custom-select");
-// });

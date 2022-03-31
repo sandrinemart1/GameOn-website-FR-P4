@@ -18,6 +18,7 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
 // launch modal form
 function launchModal() {
+  modalBlack.style.display = "none";
   modalbg.style.display = "block";
 }
 // Close modal
@@ -62,14 +63,14 @@ let cityUs = "";
 let classes = (classes) => document.getElementsByClassName(classes);
 
 let msgcss = classes("formData");
-let errorMesg = classes("formData[data-error]");
+
 /*regex pour definir2 caracteres min +zero chiffre + autorise prénoms composés*/
 const nameReGex =
   /^[a-zA-ZéèïîÉÈÎ][a-zA-Zéèêàçîï]+([-'\s][a-zA-ZéèïîÉÈÎ][a-zA-Zéèêàçîï]+)?$/;
 // regex email definit ensemble caractères suivi d 1 @ suivi ensemble de caractères suivi d'un point suivui de 2 à 10 caracteres en miniucules
 const emailRegex = /^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/;
 //regex date de naissance  avec limite d'age à la majorité
-const birthRegExp = /^(19\d\d|20[0-5])[-/]([0-9]|1[012])[-/]([12][0-9]|3[01])/;
+const birthRegExp = /^(19\d\d|20[0-5])[-/]([0-9]|1[012])[-/]([012][0-9]|3[01])/;
 
 // validation chaque  champ rempli,format respecté et messages en rapport sur input
 
@@ -183,8 +184,10 @@ function validQuantity(e) {
     QuantityValid = true;
   }
 }
+//let quantityInput =Quantity.value;
+//const validQuantity = quantityInput.length >0;
 
-// // test boutons radio
+//  test boutons radio
 let cityChoice = false;
 let citiesLoc = document.querySelector("#cities-location");
 citiesLoc.addEventListener("click", (e) => {
@@ -205,9 +208,7 @@ citiesLoc.addEventListener("click", (e) => {
 
 // tester les cgu
 terms.addEventListener("input", validTerms);
-// terms.addEventListener("input", (e) => {
-//   console.log(e);
-// });
+
 function validTerms() {
   if (terms.checked) {
     msgcss[6].dataset.thanks =
@@ -238,13 +239,20 @@ function validate() {
     termsValid == true
   ) {
     msgcss[8].dataset.errorVisible = false;
-    modalBlack.style.display = "inherit";
+    modalBlack.style.display = "block";
     msgFinal.innerHTML =
       "Merci " +
       prenom +
       ", d'avoir validé ta participation pour le tournoi de <br>" +
       cityUs;
     btnValid.value = "Fermer";
+    msgcss[0].dataset.thanksVisible = false;
+    msgcss[1].dataset.thanksVisible = false;
+    msgcss[2].dataset.thanksVisible = false;
+    msgcss[3].dataset.thanksVisible = false;
+    msgcss[4].dataset.thanksVisible = false;
+    msgcss[5].dataset.thanksVisible = false;
+    msgcss[6].dataset.thanksVisible = false;
   } else {
     msgcss[8].dataset.errorVisible = true;
     msgcss[8].dataset.error = "le formulaire est incomplet. désolé!";
