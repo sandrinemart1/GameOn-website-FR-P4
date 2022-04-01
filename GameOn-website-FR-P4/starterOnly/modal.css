@@ -182,6 +182,7 @@ main {
   width: 100%;
   max-width: 536px;
   animation-name: modalopen;
+  animation: modalclose  400ms  forwards;
   animation-fill-mode: forwards;
   animation-duration: var(--modal-duration);
   background: #232323;
@@ -535,6 +536,9 @@ footer {
   .hero-headline {
     font-size: 5rem;
   }
+  .topnav a {
+    padding: 12px 6px;
+  }
 }
 @media screen and (max-width: 800px) {
   .hero-section {
@@ -587,14 +591,16 @@ footer {
 @media screen and (max-width: 540px) {
   .hero-headline {
     font-size: 2.2rem;
-    /* margin-top: 20%; */
+    margin-top: 10%;
   }
   main {
-    height: 100vh;
-  }
-  .bground {
     position: relative;
-    top: -865px;
+    margin-top: 85px;
+  }
+
+  .bground {
+    position: absolute;
+    top: 0px;
   }
   .hero-content {
     min-width: 330px;
@@ -604,7 +610,13 @@ footer {
     margin: 20% auto;
   }
   .topnav {
+    position: fixed;
+    top: 0;
     z-index: 2;
+    width: 93%;
+    margin-top: 0;
+    background: white;
+    border-top: 10px solid white;
   }
   label {
     font-size: 14px;
@@ -623,13 +635,13 @@ footer {
     transform: translateY(0px);
   }
 }
-@keyframes modalclose {
+/* @keyframes modalclose {
   from {
     opacity: 1;
-    transform: translateY(40px);
+    transform: translateY(0px);
   }
   to {
     opacity: 0;
     transform: translateY(150px);
   }
-}
+} */

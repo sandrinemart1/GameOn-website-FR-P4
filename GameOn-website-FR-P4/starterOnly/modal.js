@@ -13,18 +13,6 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 let form = document.querySelector("#reserve");
 
-// launch modal event
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-
-// launch modal form
-function launchModal() {
-  modalBlack.style.display = "none";
-  modalbg.style.display = "block";
-}
-// Close modal
-function modalClose() {
-  modalbg.style.display = "none";
-}
 //cibler les id et les classes
 //creer une fonction pour simplifier les ciblages
 let id = (id) => document.getElementById(id);
@@ -71,6 +59,19 @@ const nameReGex =
 const emailRegex = /^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/;
 //regex date de naissance  avec limite d'age à la majorité
 const birthRegExp = /^(19\d\d|20[0-5])[-/]([0-9]|1[012])[-/]([012][0-9]|3[01])/;
+
+// launch modal event
+modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+
+// launch modal form
+function launchModal() {
+  modalBlack.style.display = "none";
+  modalbg.style.display = "block";
+}
+// Close modal
+function modalClose() {
+  modalbg.style.display = "none";
+}
 
 // validation chaque  champ rempli,format respecté et messages en rapport sur input
 

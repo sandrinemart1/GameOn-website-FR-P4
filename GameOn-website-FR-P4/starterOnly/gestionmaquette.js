@@ -1,3 +1,5 @@
+//variables pour arrierefond modal
+
 let bgDelete1 = document.querySelector(".hero-section");
 let bgDelete2 = document.querySelector(".topnav");
 let bgDelete3 = document.querySelector("footer");
@@ -5,7 +7,9 @@ let bgDelete4 = document.querySelector(".bground");
 let modBtn = document.querySelector(".modal-btn");
 let spanClose = document.querySelector(".close");
 let modalBody = document.querySelector(".modal-body");
-var x = document.getElementById("myTopnav");
+//variable pour positionnement modal sur Iphone
+const topNav = document.getElementById("myTopnav");
+const modal = document.querySelector(".content");
 
 //fonction aides fonction restauration(arrierefond-resetmodal, form et bouton submit)
 function restoreMainPageHelp() {
