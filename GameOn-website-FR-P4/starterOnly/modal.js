@@ -58,7 +58,7 @@ const nameReGex =
 // regex email definit ensemble caractères suivi d 1 @ suivi ensemble de caractères suivi d'un point suivui de 2 à 10 caracteres en miniucules
 const emailRegex = /^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/;
 //regex date de naissance  avec limite d'age à la majorité
-const birthRegExp = /^(19\d\d|20[0-5])[-/]([0-9]|1[012])[-/]([012][0-9]|3[01])/;
+const birthRegExp = /^(19\d\d|200[0-5])[-](0[1-9]|1[0-2])[-]([012][0-9]|3[01])/;
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -200,9 +200,6 @@ citiesLoc.addEventListener("click", (e) => {
     msgcss[5].dataset.thanksVisible = true;
     cityChoice = true;
   } else {
-    msgcss[5].dataset.error = "merci de cocher ton choix";
-    msgcss[5].dataset.thanksVisible = false;
-    msgcss[5].dataset.errorVisible = true;
     cityChoice = false;
   }
 });
@@ -247,6 +244,7 @@ function validate() {
       ", d'avoir validé ta participation pour le tournoi de <br>" +
       cityUs;
     btnValid.value = "Fermer";
+    firstValid = false;
     msgcss[0].dataset.thanksVisible = false;
     msgcss[1].dataset.thanksVisible = false;
     msgcss[2].dataset.thanksVisible = false;
@@ -255,7 +253,43 @@ function validate() {
     msgcss[5].dataset.thanksVisible = false;
     msgcss[6].dataset.thanksVisible = false;
   } else {
+    if (!firstValid) {
+      msgcss[0].dataset.error = "merci de renseigner ton prénom";
+      msgcss[0].dataset.thanksVisible = false;
+      msgcss[0].dataset.errorVisible = true;
+    }
+    if (!lastValid) {
+      msgcss[1].dataset.error = "merci de renseigner ton nom";
+      msgcss[1].dataset.thanksVisible = false;
+      msgcss[1].dataset.errorVisible = true;
+    }
+    if (!eMailValid) {
+      msgcss[2].dataset.error = "merci de renseigner ton E-mail";
+      msgcss[2].dataset.thanksVisible = false;
+      msgcss[2].dataset.errorVisible = true;
+    }
+    if (!birthDateValid) {
+      msgcss[3].dataset.error = "merci de renseigner ton âge";
+      msgcss[3].dataset.thanksVisible = false;
+      msgcss[3].dataset.errorVisible = true;
+    }
+    if (!QuantityValid) {
+      msgcss[4].dataset.error = "merci de renseigner un nombre entre 0 et 99";
+      msgcss[4].dataset.thanksVisible = false;
+      msgcss[4].dataset.errorVisible = true;
+    }
+    if (!cityChoice) {
+      msgcss[5].dataset.error = "merci de cocher ton choix";
+      msgcss[5].dataset.thanksVisible = false;
+      msgcss[5].dataset.errorVisible = true;
+    }
+    if (!termsValid) {
+      msgcss[6].dataset.error = "champ requis";
+      msgcss[6].dataset.thanksVisible = false;
+      msgcss[6].dataset.errorVisible = true;
+    }
     msgcss[8].dataset.errorVisible = true;
-    msgcss[8].dataset.error = "le formulaire est incomplet. désolé!";
+    // msgcss[8].dataset.error = "le formulaire est incomplet. désolé!";
   }
 }
+console.log(btnValid);
