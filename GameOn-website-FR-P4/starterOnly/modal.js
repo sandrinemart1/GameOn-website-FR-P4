@@ -195,7 +195,7 @@ citiesLoc.addEventListener("click", (e) => {
   if (e.target.classList.contains("checkbox-input")) {
     cityUs = e.target.value;
 
-    msgcss[5].dataset.thanks = "merci de nous avoir confié ton choix";
+    msgcss[5].dataset.thanks = "merci pour ton choix";
     msgcss[5].dataset.errorVisible = false;
     msgcss[5].dataset.thanksVisible = true;
     cityChoice = true;
