@@ -182,7 +182,6 @@ main {
   width: 100%;
   max-width: 536px;
   animation-name: modalopen;
-  animation: modalclose  400ms  forwards;
   animation-fill-mode: forwards;
   animation-duration: var(--modal-duration);
   background: #232323;
@@ -635,13 +634,3 @@ footer {
     transform: translateY(0px);
   }
 }
-/* @keyframes modalclose {
-  from {
-    opacity: 1;
-    transform: translateY(0px);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(150px);
-  }
-} */
