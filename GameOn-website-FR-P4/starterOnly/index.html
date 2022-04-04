@@ -55,7 +55,13 @@
         <div class="content">
           <span class="close" onclick="modalClose()"></span>
           <div class="modal-body">
-            <form name="reserve" id="reserve" action="index.html" method="get">
+            <form
+              name="reserve"
+              id="reserve"
+              action="index.html"
+              method="get"
+              onsubmit="validate()"
+            >
               <!--post evite que l 'adresse mail soit visible'-->
               <div class="formData">
                 <label for="first">Prénom</label><br />
