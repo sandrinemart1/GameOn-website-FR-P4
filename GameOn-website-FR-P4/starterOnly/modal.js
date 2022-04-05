@@ -225,7 +225,7 @@ function validTerms() {
 myForm.addEventListener("submit", (e) => {
   e.preventDefault();
 });
-myForm.addEventListener("submit", validate);
+myForm.addEventListener("submit", validate); 
 function validate() {
   if (
     firstValid == true &&
