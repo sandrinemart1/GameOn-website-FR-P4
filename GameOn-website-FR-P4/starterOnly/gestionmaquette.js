@@ -15,7 +15,6 @@ const modal = document.querySelector(".content");
 function restoreMainPageHelp() {
   bgDelete2.style.display = "block";
   bgDelete3.style.display = "block";
-  // bgDelete4.style.background = "rgba(26, 39, 156, 0.4)";
   modalBlack.style.display = "none";
   modalClose();
   form.reset();
